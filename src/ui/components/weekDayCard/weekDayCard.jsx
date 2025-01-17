@@ -9,7 +9,7 @@ export const WeekDayCard = ({
 }) => {
   const emoji = precipitationSum ? "🌧️" : snowSum ? "❄️" : "☀️";
   return (
-    <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm px-3 py-4 rounded-full min-w-[30px] hover:bg-white/20">
+    <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-sm px-3 py-4 rounded-full min-w-[30px] hover:bg-white/20">
       {/* Week Day */}
       <span className="text-white text-sm font-medium mb-2">{day}</span>
 
@@ -20,12 +20,12 @@ export const WeekDayCard = ({
       <div className="flex flex-col items-center gap-1 mt-2">
         <div className="flex items-center gap-1">
           <span className="text-white/60 text-xs">↑</span>
-          <span className="text-white font-bold text-xs">{maxTemp}°C</span>
+          <span className="text-white font-bold text-xs">{maxTemp}°</span>
         </div>
         <div className="w-5 h-[1px] bg-white/30"></div>
         <div className="flex items-center gap-1">
           <span className="text-white/60 text-xs">↓</span>
-          <span className="text-white/60 text-xs">{minTemp}°C</span>
+          <span className="text-white/60 text-xs">{minTemp}°</span>
         </div>
       </div>
     </div>

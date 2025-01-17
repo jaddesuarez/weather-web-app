@@ -6,8 +6,10 @@ export const getTodayWeather = (weather) => {
     timezone: weather.timezone,
     weather: weather.current,
     hours: weather.hourly,
-    sunrise: weather.daily.sunrise[0],
-    sunset: weather.daily.sunset[0],
+    sunrise: getHour(weather.daily.sunrise[0]),
+    sunset: getHour(weather.daily.sunset[0]),
+    maxTemp: Math.round(weather.daily.temperature_2m_max[0]),
+    minTemp: Math.round(weather.daily.temperature_2m_min[0]),
   };
 };
 
@@ -22,6 +24,10 @@ export const getWeekWeatherArray = (daily) => {
     };
   });
   return weekWeatherArray;
+};
+
+export const getHour = (time) => {
+  return moment(time).format("HH:mm");
 };
 
 export const getLanguageIcon = (lng) => {
