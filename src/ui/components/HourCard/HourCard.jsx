@@ -11,7 +11,7 @@ export const HourCard = ({ temperature, hour }) => {
       {/* Weather Emoji */}
       <span className="text-3xl my-1">{emoji}</span>
       {/* Hour */}
-      <span className="text-white text-sm font-medium mb-2">{hour}°</span>
+      <span className="text-white text-sm font-medium mb-2">{hour}</span>
     </div>
   );
 };

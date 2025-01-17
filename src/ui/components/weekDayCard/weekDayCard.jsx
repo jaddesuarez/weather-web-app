@@ -9,7 +9,7 @@ export const WeekDayCard = ({
 }) => {
   const emoji = precipitationSum ? "🌧️" : snowSum ? "❄️" : "☀️";
   return (
-    <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-sm px-3 py-4 rounded-full min-w-[30px] hover:bg-white/20">
+    <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-sm px-3 py-4 rounded-full max-w-[80px] hover:bg-white/20">
       {/* Week Day */}
       <span className="text-white text-sm font-medium mb-2">{day}</span>
 

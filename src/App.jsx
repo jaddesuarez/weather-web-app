@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getTodayWeather, getWeekWeatherArray } from "@utils";
 import { openMateoService } from "@services/open-mateo.service";
 import { NavBar } from "@components/NavBar/NavBar";
-import { WeekDayCard } from "@components/weekDayCard/weekDayCard";
+import { WeekForecast } from "@components/WeekForecast/WeekForecast";
 import { WeatherCard } from "@components/WeatherCard/WeatherCard";
 import { HourlyCard } from "@components/HourlyCard/HourlyCard";
 import { SunCard } from "@components/SunCard/SunCard";
@@ -40,18 +40,7 @@ function App() {
             <div className="flex flex-col justify-center items-center gap-6">
               <div>
                 <p className="text-white text-xl font-bold">7-Days Forecast</p>
-                <div className="flex gap-2 justify-center mt-4">
-                  {weekWeather.map((day, idx) => (
-                    <WeekDayCard
-                      key={idx}
-                      day={day.time}
-                      maxTemp={day.temperature_2m_max}
-                      minTemp={day.temperature_2m_min}
-                      precipitationSum={day.precipitation_sum}
-                      snowSum={day.snowfall_sum}
-                    />
-                  ))}
-                </div>
+                <WeekForecast weekWeather={weekWeather} />
               </div>
               <div className="flex justify-center items-center gap-4">
                 <SunCard
