@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import moment from "moment";
-import { NavBar } from "./ui/components/NavBar/NavBar";
-import { openMateoService } from "./lib/services/open-mateo.service";
-import { WeekDayCard } from "./ui/components/weekDayCard/weekDayCard";
+import { getTodayWeather, getWeekWeatherArray } from "@utils";
+import { openMateoService } from "@services/open-mateo.service";
+import { NavBar } from "@components/NavBar/NavBar";
+import { WeekDayCard } from "@components/weekDayCard/weekDayCard";
 
 function App() {
   const [todayWeather, setTodayWeather] = useState(null);
@@ -11,22 +11,9 @@ function App() {
   useEffect(() => {
     getWeather(52.52, 13.41).then((res) => {
       console.log(res);
-      setTodayWeather({
-        timezone: res.timezone,
-        weather: res.current,
-        hours: res.hourly,
-      });
+      setTodayWeather(getTodayWeather(res));
 
-      const weekWeatherArray = res.daily.time.map((day, idx) => {
-        return {
-          time: moment(day).format("ddd"),
-          precipitationSum: res.daily.precipitation_sum[idx],
-          snowfall_sum: res.daily.snowfall_sum[idx],
-          temperature_2m_max: Math.round(res.daily.temperature_2m_max[idx]),
-          temperature_2m_min: Math.round(res.daily.temperature_2m_min[idx]),
-        };
-      });
-      setWeekWeather(weekWeatherArray);
+      setWeekWeather(getWeekWeatherArray(res.daily));
     });
   }, [getWeather]);
   return (
