@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getTodayWeather, getWeekWeatherArray } from "@utils";
+import moment from "moment";
+import { getTodayWeather, getWeekWeatherArray, isDayTime } from "@utils";
 import { openMateoService } from "@services/open-mateo.service";
 import { NavBar } from "@components/NavBar/NavBar";
 import { WeekForecast } from "@components/WeekForecast/WeekForecast";
@@ -34,8 +35,17 @@ function App() {
                 temperature={Math.round(todayWeather.weather.temperature_2m)}
                 maxTemp={todayWeather.maxTemp}
                 minTemp={todayWeather.minTemp}
+                isDayTime={isDayTime(
+                  parseInt(moment().format("HH:mm").split(":")[0]),
+                  parseInt(todayWeather.sunrise.split(":")[0]),
+                  parseInt(todayWeather.sunset.split(":")[0])
+                )}
               />
-              <HourlyCard />
+              <HourlyCard
+                hourlyWeather={todayWeather.hours}
+                sunrise={todayWeather.sunrise}
+                sunset={todayWeather.sunset}
+              />
             </div>
             <div className="flex flex-col justify-center items-center gap-6">
               <div>

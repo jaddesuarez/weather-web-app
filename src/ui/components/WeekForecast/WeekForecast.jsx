@@ -4,13 +4,10 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
 export const WeekForecast = ({ weekWeather }) => {
-  const responsive = {
-    0: { items: 4, itemsFit: "contain" },
-    750: { items: 5, itemsFit: "contain" },
-    950: { items: 5, itemsFit: "contain" },
-    1200: { items: 5, itemsFit: "contain" },
+  const weekResponsive = {
+    0: { items: 3 },
   };
-  const items = weekWeather.map((day, idx) => (
+  const weekItems = weekWeather.map((day, idx) => (
     <WeekDayCard
       key={idx}
       day={day.time}
@@ -25,8 +22,8 @@ export const WeekForecast = ({ weekWeather }) => {
       <AliceCarousel
         disableButtonsControls
         mouseTracking
-        items={items}
-        responsive={responsive}
+        items={weekItems}
+        responsive={weekResponsive}
       />
     </div>
   );

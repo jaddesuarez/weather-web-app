@@ -41,3 +41,7 @@ export const getLanguageIcon = (lng) => {
 export const changeLanguage = (lng) => {
   i18n.changeLanguage(lng);
 };
+
+export const isDayTime = (currentHour, sunrise, sunset) => {
+  return currentHour >= sunrise && currentHour <= sunset;
+};

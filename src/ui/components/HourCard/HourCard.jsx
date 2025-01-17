@@ -1,7 +1,22 @@
 import PropTypes from "prop-types";
 
-export const HourCard = ({ temperature, hour }) => {
-  const emoji = temperature > 20 ? "☀️" : "🌧️";
+export const HourCard = ({
+  temperature,
+  hour,
+  rain,
+  snow,
+  cloudCover,
+  isDayTime,
+}) => {
+  const emoji = rain
+    ? "🌧️"
+    : snow
+    ? "❄️"
+    : cloudCover > 50
+    ? "☁️"
+    : isDayTime
+    ? "☀️"
+    : "🌑";
   return (
     <div className="flex flex-col justify-center items-center">
       {/* Temperature */}
@@ -19,4 +34,8 @@ export const HourCard = ({ temperature, hour }) => {
 HourCard.propTypes = {
   temperature: PropTypes.number.isRequired,
   hour: PropTypes.string.isRequired,
+  rain: PropTypes.number.isRequired,
+  snow: PropTypes.number.isRequired,
+  cloudCover: PropTypes.number.isRequired,
+  isDayTime: PropTypes.bool.isRequired,
 };

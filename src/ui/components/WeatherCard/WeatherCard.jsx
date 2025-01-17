@@ -7,8 +7,17 @@ export const WeatherCard = ({
   temperature,
   maxTemp,
   minTemp,
+  isDayTime,
 }) => {
-  const emoji = snow ? "❄️" : rain ? "🌧️" : cloudCover > 50 ? "☁️" : "☀️";
+  const emoji = snow
+    ? "❄️"
+    : rain
+    ? "🌧️"
+    : cloudCover > 50
+    ? "☁️"
+    : isDayTime
+    ? "☀️"
+    : "🌑";
 
   return (
     <div className="px-3 text-white">
@@ -33,4 +42,5 @@ WeatherCard.propTypes = {
   temperature: PropTypes.number.isRequired,
   maxTemp: PropTypes.number.isRequired,
   minTemp: PropTypes.number.isRequired,
+  isDayTime: PropTypes.bool.isRequired,
 };
