@@ -4,7 +4,7 @@ export const LanguageDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative bg-white rounded-md w-14 p-1">
+    <div className="relative bg-white/10 backdrop-blur-sm rounded-md w-14 p-1">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="text-white flex items-center justify-center space-x-1"
@@ -15,7 +15,7 @@ export const LanguageDropdown = () => {
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"
-          stroke="black"
+          stroke="currentColor"
           viewBox="0 0 24 24"
         >
           <path
