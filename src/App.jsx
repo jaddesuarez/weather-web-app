@@ -17,12 +17,12 @@ import { SunCard } from "@components/SunCard/SunCard";
 import { SearchPlaceInput } from "@components/SearchPlaceInput/SearchPlaceInput";
 
 function App() {
+  const { t } = useTranslation();
+  const { getWeather } = openMateoService;
   const [todayWeather, setTodayWeather] = useState(null);
   const [weekWeather, setWeekWeather] = useState(null);
   const [currCity, setCurrCity] = useState(null);
   const [forecastColor, setForecastColor] = useState("fuchsia");
-  const { t } = useTranslation();
-  const { getWeather } = openMateoService;
 
   const handleLocationSelect = ({ lat, lng }) => {
     getWeather(lat, lng).then((res) => {

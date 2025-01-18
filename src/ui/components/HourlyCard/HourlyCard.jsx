@@ -1,4 +1,3 @@
-import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { gradientCardClasses } from "@utils/clx";
 import { HourCard } from "../HourCard/HourCard";
@@ -7,7 +6,7 @@ import { getHour, isDayTime } from "@utils";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import PropTypes from "prop-types";
-
+import moment from "moment";
 export const HourlyCard = ({
   hourlyWeather,
   sunrise,
@@ -15,6 +14,10 @@ export const HourlyCard = ({
   forecastColor,
 }) => {
   const { t } = useTranslation();
+
+  const month = moment().format("MMMM").toLowerCase();
+  const dayNumber = moment().format("D");
+
   const hoursResponsive = {
     0: { items: 3, itemsFit: "contain" },
     750: { items: 4, itemsFit: "contain" },
@@ -50,7 +53,9 @@ export const HourlyCard = ({
     <div className={gradientCardClasses(forecastColor)}>
       <div className="flex justify-between px-8">
         <p>{t("common.today")}</p>
-        <p>{moment().format("MMMM, D")}</p>
+        <p>
+          {t(`months.${month}`)}, {dayNumber}
+        </p>
       </div>
       <div className="w-full h-[1px] bg-white/30"></div>
       <div className="flex gap-4 px-2 justify-center mt-4 max-w-[300px] sm:max-w-[450px]">

@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getLanguageIcon, changeLanguage } from "@utils";
+import { getLanguageIcon } from "@utils";
 
 export const LanguageDropdown = () => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [lng, setLng] = useState(i18n.language);
 
-  useEffect(() => {
-    setLng(i18n.language);
-  }, [i18n.language]);
+  const handleLanguageChange = (language) => {
+    i18n.changeLanguage(language);
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative bg-white/10 backdrop-blur-sm rounded-md w-14 p-1">
@@ -17,7 +17,7 @@ export const LanguageDropdown = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="text-white flex items-center justify-center space-x-1"
       >
-        <span className="text-2xl">{getLanguageIcon(lng)}</span>
+        <span className="text-2xl">{getLanguageIcon(i18n.language)}</span>
         <svg
           className={`w-4 h-4 transition-transform ${
             isOpen ? "rotate-180" : ""
@@ -40,30 +40,21 @@ export const LanguageDropdown = () => {
         <div className="absolute right-0 mt-2 w-14 bg-white rounded-md shadow-lg py-1">
           <a
             href="#"
-            onClick={() => {
-              changeLanguage("en");
-              setIsOpen(false);
-            }}
+            onClick={() => handleLanguageChange("en")}
             className="block px-4 py-2 text-2xl text-gray-800 hover:bg-gray-100"
           >
             🇺🇸
           </a>
           <a
             href="#"
-            onClick={() => {
-              changeLanguage("es");
-              setIsOpen(false);
-            }}
+            onClick={() => handleLanguageChange("es")}
             className="block px-4 py-2 text-2xl text-gray-800 hover:bg-gray-100"
           >
             🇪🇸
           </a>
           <a
             href="#"
-            onClick={() => {
-              changeLanguage("pt");
-              setIsOpen(false);
-            }}
+            onClick={() => handleLanguageChange("pt")}
             className="block px-4 py-2 text-2xl text-gray-800 hover:bg-gray-100"
           >
             🇧🇷

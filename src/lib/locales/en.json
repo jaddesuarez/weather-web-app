@@ -10,5 +10,28 @@
   "searchTitle": "Search for any city in the world",
   "weekForecastTitle": "7-Days Forecast",
   "sunriseTitle": "Sunrise",
-  "sunsetTitle": "Sunset"
+  "sunsetTitle": "Sunset",
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "smallWeekDays": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  }
 }

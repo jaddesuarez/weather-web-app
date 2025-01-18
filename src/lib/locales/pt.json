@@ -10,5 +10,28 @@
   "searchTitle": "Pesquise qualquer cidade do mundo",
   "weekForecastTitle": "Previsão de 7 dias",
   "sunriseTitle": "Nascer do Sol",
-  "sunsetTitle": "Pôr do Sol"
+  "sunsetTitle": "Pôr do Sol",
+  "months": {
+    "january": "Janeiro",
+    "february": "Fevereiro",
+    "march": "Março",
+    "april": "Abril",
+    "may": "Maio",
+    "june": "Junho",
+    "july": "Julho",
+    "august": "Agosto",
+    "september": "Setembro",
+    "october": "Outubro",
+    "november": "Novembro",
+    "december": "Dezembro"
+  },
+  "smallWeekDays": {
+    "mon": "Seg",
+    "tue": "Ter",
+    "wed": "Qua",
+    "thu": "Qui",
+    "fri": "Sex",
+    "sat": "Sáb",
+    "sun": "Dom"
+  }
 }

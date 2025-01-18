@@ -1,6 +1,5 @@
 import moment from "moment";
 import { bgColors } from "@constants";
-import { i18n } from "@configs/i18n.config";
 
 export const getTodayWeather = (weather) => {
   return {
@@ -37,10 +36,6 @@ export const getLanguageIcon = (lng) => {
     es: "🇪🇸",
     pt: "🇧🇷",
   }[lng];
-};
-
-export const changeLanguage = (lng) => {
-  i18n.changeLanguage(lng);
 };
 
 export const isDayTime = (currentHour, sunrise, sunset) => {

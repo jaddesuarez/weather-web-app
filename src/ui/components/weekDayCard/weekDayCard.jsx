@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 export const WeekDayCard = ({
   day,
@@ -7,11 +8,14 @@ export const WeekDayCard = ({
   precipitationSum,
   snowSum,
 }) => {
+  const { t } = useTranslation();
   const emoji = precipitationSum ? "🌧️" : snowSum ? "❄️" : "☀️";
   return (
     <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-sm px-3 py-4 rounded-full max-w-[80px] hover:bg-white/20">
       {/* Week Day */}
-      <span className="text-white text-sm font-medium mb-2">{day}</span>
+      <span className="text-white text-sm font-medium mb-2">
+        {t(`smallWeekDays.${day.toLowerCase()}`)}
+      </span>
 
       {/* Weather Emoji */}
       <span className="text-3xl my-1">{emoji}</span>
