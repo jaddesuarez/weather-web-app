@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 export const WeatherCard = ({
   rain,
@@ -9,6 +10,7 @@ export const WeatherCard = ({
   minTemp,
   isDayTime,
 }) => {
+  const { t } = useTranslation();
   const emoji = snow
     ? "❄️"
     : rain
@@ -25,7 +27,13 @@ export const WeatherCard = ({
       <div>
         <p className="text-3xl font-bold p-2">{temperature}°</p>
         <p className="text-sm">
-          {snow ? "Snow" : rain ? "Rain" : cloudCover > 50 ? "Cloudy" : "Sunny"}
+          {snow
+            ? t("common.snowy")
+            : rain
+            ? t("common.rainy")
+            : cloudCover > 50
+            ? t("common.cloudy")
+            : t("common.sunny")}
         </p>
         <p className="text-sm">
           Max: {maxTemp}° | Min: {minTemp}°

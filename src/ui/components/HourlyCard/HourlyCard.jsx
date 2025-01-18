@@ -1,4 +1,6 @@
 import moment from "moment";
+import { useTranslation } from "react-i18next";
+import { gradientCardClasses } from "@utils/clx";
 import { HourCard } from "../HourCard/HourCard";
 import { renderPrevButton, renderNextButton } from "@utils/carousel";
 import { getHour, isDayTime } from "@utils";
@@ -6,7 +8,13 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import PropTypes from "prop-types";
 
-export const HourlyCard = ({ hourlyWeather, sunrise, sunset }) => {
+export const HourlyCard = ({
+  hourlyWeather,
+  sunrise,
+  sunset,
+  forecastColor,
+}) => {
+  const { t } = useTranslation();
   const hoursResponsive = {
     0: { items: 3, itemsFit: "contain" },
     750: { items: 4, itemsFit: "contain" },
@@ -32,15 +40,22 @@ export const HourlyCard = ({ hourlyWeather, sunrise, sunset }) => {
     );
   });
 
+  const currentHourIndex = hourlyWeather.time.findIndex(
+    (time) =>
+      parseInt(time.split("T")[1].split(":")[0]) ===
+      parseInt(moment().format("HH"))
+  );
+
   return (
-    <div className="text-white min-w-[300px] bg-gradient-to-b from-indigo-950 to-fuchsia-400 py-4 rounded-3xl shadow-lg">
+    <div className={gradientCardClasses(forecastColor)}>
       <div className="flex justify-between px-8">
-        <p>Today</p>
+        <p>{t("common.today")}</p>
         <p>{moment().format("MMMM, D")}</p>
       </div>
       <div className="w-full h-[1px] bg-white/30"></div>
       <div className="flex gap-4 px-2 justify-center mt-4 max-w-[300px] sm:max-w-[450px]">
         <AliceCarousel
+          activeIndex={currentHourIndex}
           disableDotsControls
           mouseTracking
           infinite
@@ -64,4 +79,5 @@ HourlyCard.propTypes = {
   }).isRequired,
   sunrise: PropTypes.string.isRequired,
   sunset: PropTypes.string.isRequired,
+  forecastColor: PropTypes.string.isRequired,
 };

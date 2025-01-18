@@ -1,3 +1,14 @@
 {
-  "appTitle": "Sunny"
+  "appTitle": "Sunny",
+  "common": {
+    "today": "Hoy",
+    "sunny": "Soleado",
+    "cloudy": "Nublado",
+    "rainy": "Lluvioso",
+    "snowy": "Nevado"
+  },
+  "searchTitle": "Busca cualquier ciudad del mundo",
+  "weekForecastTitle": "Pronóstico de 7 días",
+  "sunriseTitle": "Amanecer",
+  "sunsetTitle": "Atardecer"
 }

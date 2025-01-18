@@ -1,3 +1,14 @@
 {
-  "appTitle": "Sunny"
+  "appTitle": "Sunny",
+  "common": {
+    "today": "Today",
+    "sunny": "Sunny",
+    "cloudy": "Cloudy",
+    "rainy": "Rainy",
+    "snowy": "Snowy"
+  },
+  "searchTitle": "Search for any city in the world",
+  "weekForecastTitle": "7-Days Forecast",
+  "sunriseTitle": "Sunrise",
+  "sunsetTitle": "Sunset"
 }

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export const SunCard = ({ text, hour, emoji }) => {
   return (
-    <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-sm px-6 py-4 rounded-3xl border border-white/20 shadow-lg">
+    <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-sm px-6 py-4 rounded-3xl border border-white/20 shadow-lg min-w-[100px] sm:min-w-[230px]">
       <div className="flex flex-col items-center gap-2">
         <div className="flex items-center gap-2">
           <span className="text-2xl">{emoji}</span>

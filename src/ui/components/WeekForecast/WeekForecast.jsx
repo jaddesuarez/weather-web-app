@@ -1,30 +1,19 @@
 import PropTypes from "prop-types";
 import { WeekDayCard } from "../weekDayCard/weekDayCard";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
 
 export const WeekForecast = ({ weekWeather }) => {
-  const weekResponsive = {
-    0: { items: 3 },
-  };
-  const weekItems = weekWeather.map((day, idx) => (
-    <WeekDayCard
-      key={idx}
-      day={day.time}
-      maxTemp={day.temperature_2m_max}
-      minTemp={day.temperature_2m_min}
-      precipitationSum={day.precipitation_sum}
-      snowSum={day.snowfall_sum}
-    />
-  ));
   return (
-    <div className="flex justify-center mt-4 max-w-[300px] sm:max-w-[450px]">
-      <AliceCarousel
-        disableButtonsControls
-        mouseTracking
-        items={weekItems}
-        responsive={weekResponsive}
-      />
+    <div className="flex justify-center flex-wrap gap-4 mt-4 max-w-[300px] sm:max-w-[500px]">
+      {weekWeather.map((day, idx) => (
+        <WeekDayCard
+          key={idx}
+          day={day.time}
+          maxTemp={day.temperature_2m_max}
+          minTemp={day.temperature_2m_min}
+          precipitationSum={day.precipitation_sum}
+          snowSum={day.snowfall_sum}
+        />
+      ))}
     </div>
   );
 };

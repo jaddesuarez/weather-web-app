@@ -1,4 +1,5 @@
 import moment from "moment";
+import { bgColors } from "@constants";
 import { i18n } from "@configs/i18n.config";
 
 export const getTodayWeather = (weather) => {
@@ -44,4 +45,16 @@ export const changeLanguage = (lng) => {
 
 export const isDayTime = (currentHour, sunrise, sunset) => {
   return currentHour >= sunrise && currentHour <= sunset;
+};
+
+export const getForecastColor = (weather) => {
+  const { rain, snow, cloud_cover } = weather.current;
+  const weatherCode = snow
+    ? "snowy"
+    : rain
+    ? "rainy"
+    : cloud_cover > 50
+    ? "cloudy"
+    : "sunny";
+  return bgColors[weatherCode] || "default";
 };

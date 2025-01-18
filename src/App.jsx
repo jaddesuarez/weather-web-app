@@ -1,30 +1,50 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import moment from "moment";
-import { getTodayWeather, getWeekWeatherArray, isDayTime } from "@utils";
+import { useTranslation } from "react-i18next";
+import { gradientBgClasses } from "@utils/clx";
+import {
+  getTodayWeather,
+  getWeekWeatherArray,
+  isDayTime,
+  getForecastColor,
+} from "@utils";
 import { openMateoService } from "@services/open-mateo.service";
 import { NavBar } from "@components/NavBar/NavBar";
 import { WeekForecast } from "@components/WeekForecast/WeekForecast";
 import { WeatherCard } from "@components/WeatherCard/WeatherCard";
 import { HourlyCard } from "@components/HourlyCard/HourlyCard";
 import { SunCard } from "@components/SunCard/SunCard";
+import { SearchPlaceInput } from "@components/SearchPlaceInput/SearchPlaceInput";
 
 function App() {
   const [todayWeather, setTodayWeather] = useState(null);
   const [weekWeather, setWeekWeather] = useState(null);
+  const [currCity, setCurrCity] = useState(null);
+  const [forecastColor, setForecastColor] = useState("fuchsia");
+  const { t } = useTranslation();
   const { getWeather } = openMateoService;
 
-  useEffect(() => {
-    getWeather(52.52, 13.41).then((res) => {
-      console.log(res);
+  const handleLocationSelect = ({ lat, lng }) => {
+    getWeather(lat, lng).then((res) => {
       setTodayWeather(getTodayWeather(res));
       setWeekWeather(getWeekWeatherArray(res.daily));
+      setForecastColor(getForecastColor(res));
     });
-  }, [getWeather]);
+  };
 
   return (
     <>
       <NavBar />
-      <div className="p-10 flex flex-col justify-center items-center text-center bg-gradient-to-b from-indigo-950 to-fuchsia-400 min-h-screen">
+      <div className={gradientBgClasses(forecastColor)}>
+        <div className="my-8">
+          <p className="text-white text-4xl font-bold mb-8 lg:text-7xl">
+            {currCity ? currCity : t("searchTitle")}
+          </p>
+          <SearchPlaceInput
+            onLocationSelect={handleLocationSelect}
+            setCurrCity={setCurrCity}
+          />
+        </div>
         {todayWeather && weekWeather && (
           <div className="flex flex-col justify-center items-center gap-4 lg:flex-row lg:gap-16">
             <div className="flex flex-col justify-center items-center gap-4">
@@ -45,21 +65,24 @@ function App() {
                 hourlyWeather={todayWeather.hours}
                 sunrise={todayWeather.sunrise}
                 sunset={todayWeather.sunset}
+                forecastColor={forecastColor}
               />
             </div>
             <div className="flex flex-col justify-center items-center gap-6">
               <div>
-                <p className="text-white text-xl font-bold">7-Days Forecast</p>
+                <p className="text-white text-xl font-bold">
+                  {t("weekForecastTitle")}
+                </p>
                 <WeekForecast weekWeather={weekWeather} />
               </div>
-              <div className="flex justify-center items-center gap-4">
+              <div className="flex justify-between items-center min-w-[300px] sm:min-w-[500px]">
                 <SunCard
-                  text={"Sunrise"}
+                  text={t("sunriseTitle")}
                   hour={todayWeather.sunrise}
                   emoji={"☀️"}
                 />
                 <SunCard
-                  text={"Sunset"}
+                  text={t("sunsetTitle")}
                   hour={todayWeather.sunset}
                   emoji={"🌑"}
                 />
