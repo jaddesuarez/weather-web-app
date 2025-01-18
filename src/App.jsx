@@ -9,7 +9,7 @@ import {
   getForecastColor,
 } from "@utils";
 import { bgColors } from "@constants";
-import { openMateoService } from "@services/open-mateo.service";
+import { openMeteoService } from "@services/open-meteo.service";
 import { NavBar } from "@components/NavBar/NavBar";
 import { WeekForecast } from "@components/WeekForecast/WeekForecast";
 import { WeatherCard } from "@components/WeatherCard/WeatherCard";
@@ -19,7 +19,7 @@ import { SearchPlaceInput } from "@components/SearchPlaceInput/SearchPlaceInput"
 
 function App() {
   const { t, i18n } = useTranslation();
-  const { getWeather } = openMateoService;
+  const { getWeather } = openMeteoService;
   const [todayWeather, setTodayWeather] = useState(null);
   const [weekWeather, setWeekWeather] = useState(null);
   const [currCity, setCurrCity] = useState(null);
