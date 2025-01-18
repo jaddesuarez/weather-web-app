@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { gradientBgClasses } from "@utils/clx";
@@ -8,6 +8,7 @@ import {
   isDayTime,
   getForecastColor,
 } from "@utils";
+import { bgColors } from "@constants";
 import { openMateoService } from "@services/open-mateo.service";
 import { NavBar } from "@components/NavBar/NavBar";
 import { WeekForecast } from "@components/WeekForecast/WeekForecast";
@@ -17,7 +18,7 @@ import { SunCard } from "@components/SunCard/SunCard";
 import { SearchPlaceInput } from "@components/SearchPlaceInput/SearchPlaceInput";
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { getWeather } = openMateoService;
   const [todayWeather, setTodayWeather] = useState(null);
   const [weekWeather, setWeekWeather] = useState(null);
@@ -31,6 +32,13 @@ function App() {
       setForecastColor(getForecastColor(res));
     });
   };
+
+  useEffect(() => {
+    setTodayWeather(null);
+    setWeekWeather(null);
+    setCurrCity(null);
+    setForecastColor(bgColors.default);
+  }, [i18n.language]);
 
   return (
     <>

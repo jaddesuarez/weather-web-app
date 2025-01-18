@@ -1,23 +1,27 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { nominatimService } from "@services/nominatim.service";
 import PropTypes from "prop-types";
 
 export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
+  const { i18n } = useTranslation();
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const wrapperRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setSuggestions([]);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const handleSelectLocation = (location) => {
+    const nameArr = location.display_name.split(",");
+    const displayName = nameArr[0] + " - " + nameArr[nameArr.length - 1];
+    const cityName = nameArr[0];
+    setSearch(cityName);
+    setSuggestions([]);
+    setCurrCity(displayName);
+    onLocationSelect({
+      lat: parseFloat(location.lat),
+      lng: parseFloat(location.lon),
+    });
+  };
 
   const searchLocation = async (query) => {
     if (query.length < 3) {
@@ -27,7 +31,7 @@ export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
 
     setIsLoading(true);
     try {
-      const res = await nominatimService.getCoordinates(query);
+      const res = await nominatimService.getCoordinates(query, i18n.language);
       setSuggestions(res);
     } catch (err) {
       console.error("Error fetching locations:", err);
@@ -42,18 +46,21 @@ export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
     }
   };
 
-  const handleSelectLocation = (location) => {
-    const nameArr = location.display_name.split(",");
-    const displayName = nameArr[0] + " - " + nameArr[nameArr.length - 1];
-    const cityName = nameArr[0];
-    setSearch(cityName);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setSuggestions([]);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    setSearch("");
     setSuggestions([]);
-    setCurrCity(displayName);
-    onLocationSelect({
-      lat: parseFloat(location.lat),
-      lng: parseFloat(location.lon),
-    });
-  };
+  }, [i18n.language]);
 
   return (
     <div ref={wrapperRef} className="relative w-full">
