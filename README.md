@@ -111,4 +111,4 @@ npm install
 
 Jadde Suarez - [Linkedin](https://www.linkedin.com/in/jaddesuarez/)
 
-Project Link: [weather-web-app](https://github.com/jaddesuarez/weather-web-app)
+Deployed Application: [weather-web-app](https://jaddesuarez-weather-app.vercel.app/)
