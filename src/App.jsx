@@ -58,7 +58,7 @@ function App() {
                     ? removeFavorite(currCity.id)
                     : addFavorite(currCity.id);
                 }}
-                className="ml-4 text-6xl hover:scale-110 transition-transform"
+                className="ml-4 text-4xl sm:text-6xl hover:scale-110 transition-transform"
               >
                 {user?.favorite?.includes(currCity.id) ? "⭐" : "☆"}
               </button>
