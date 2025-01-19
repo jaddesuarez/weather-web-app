@@ -55,6 +55,7 @@ npm install
 
 ## 🗂️ Project Structure
 
+```bash
 ├── .vscode
 ├── node_modules
 ├── .gitignore
@@ -104,6 +105,7 @@ npm install
 │   └── WeekForecast
 ├── tailwind.config.js
 └── vite.config.js
+```
 
 ## 📧 Contact
 
