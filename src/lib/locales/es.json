@@ -11,6 +11,9 @@
   "weekForecastTitle": "Pronóstico de 7 días",
   "sunriseTitle": "Amanecer",
   "sunsetTitle": "Atardecer",
+  "favoritesBtn": "Mis Ciudades",
+  "favoritesTitle": "Mis Ciudades Favoritas",
+  "favoritesEmpty": "No hay ciudades favoritas",
   "months": {
     "january": "Enero",
     "february": "Febrero",

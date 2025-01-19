@@ -11,6 +11,9 @@
   "weekForecastTitle": "7-Days Forecast",
   "sunriseTitle": "Sunrise",
   "sunsetTitle": "Sunset",
+  "favoritesBtn": "My Cities",
+  "favoritesTitle": "My Favorite Cities",
+  "favoritesEmpty": "No favorite cities yet",
   "months": {
     "january": "January",
     "february": "February",

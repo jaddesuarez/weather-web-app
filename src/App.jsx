@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useUser } from "@context/UserContext";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { gradientBgClasses } from "@utils/clx";
@@ -16,14 +17,17 @@ import { WeatherCard } from "@components/WeatherCard/WeatherCard";
 import { HourlyCard } from "@components/HourlyCard/HourlyCard";
 import { SunCard } from "@components/SunCard/SunCard";
 import { SearchPlaceInput } from "@components/SearchPlaceInput/SearchPlaceInput";
+import { FavoritesCitiesModal } from "@components/FavoritesCitiesModal/FavoritesCitiesModal";
 
 function App() {
+  const { user, addFavorite, removeFavorite } = useUser();
   const { t, i18n } = useTranslation();
   const { getWeather } = openMeteoService;
   const [todayWeather, setTodayWeather] = useState(null);
   const [weekWeather, setWeekWeather] = useState(null);
   const [currCity, setCurrCity] = useState(null);
   const [forecastColor, setForecastColor] = useState("fuchsia");
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
 
   const handleLocationSelect = ({ lat, lng }) => {
     getWeather(lat, lng).then((res) => {
@@ -42,14 +46,28 @@ function App() {
 
   return (
     <>
-      <NavBar />
+      <NavBar setIsFavoritesModalOpen={setIsFavoritesModalOpen} />
       <div className={gradientBgClasses(forecastColor)}>
         <div className="my-8">
           <p className="text-white text-4xl font-bold mb-8 lg:text-7xl">
-            {currCity ? currCity : t("searchTitle")}
+            {currCity ? currCity.name : t("searchTitle")}
+            {currCity && (
+              <button
+                onClick={() => {
+                  user?.favorite?.includes(currCity.id)
+                    ? removeFavorite(currCity.id)
+                    : addFavorite(currCity.id);
+                }}
+                className="ml-4 text-6xl hover:scale-110 transition-transform"
+              >
+                {user?.favorite?.includes(currCity.id) ? "⭐" : "☆"}
+              </button>
+            )}
           </p>
+
           <SearchPlaceInput
             onLocationSelect={handleLocationSelect}
+            currCity={currCity}
             setCurrCity={setCurrCity}
           />
         </div>
@@ -99,6 +117,12 @@ function App() {
           </div>
         )}
       </div>
+      <FavoritesCitiesModal
+        isOpen={isFavoritesModalOpen}
+        onClose={() => setIsFavoritesModalOpen(false)}
+        setCurrCity={setCurrCity}
+        handleLocationSelect={handleLocationSelect}
+      />
     </>
   );
 }

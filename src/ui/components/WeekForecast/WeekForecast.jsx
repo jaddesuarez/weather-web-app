@@ -3,7 +3,7 @@ import { WeekDayCard } from "../weekDayCard/weekDayCard";
 
 export const WeekForecast = ({ weekWeather }) => {
   return (
-    <div className="flex justify-center flex-wrap gap-4 mt-4 max-w-[300px] sm:max-w-[500px]">
+    <div className="flex justify-center flex-wrap gap-3 mt-4 max-w-[300px] sm:max-w-[500px]">
       {weekWeather.map((day, idx) => (
         <WeekDayCard
           key={idx}

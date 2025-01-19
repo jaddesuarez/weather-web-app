@@ -3,7 +3,11 @@ import { useTranslation } from "react-i18next";
 import { nominatimService } from "@services/nominatim.service";
 import PropTypes from "prop-types";
 
-export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
+export const SearchPlaceInput = ({
+  onLocationSelect,
+  currCity,
+  setCurrCity,
+}) => {
   const { i18n } = useTranslation();
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -16,7 +20,12 @@ export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
     const cityName = nameArr[0];
     setSearch(cityName);
     setSuggestions([]);
-    setCurrCity(displayName);
+    setCurrCity({
+      name: displayName,
+      id: location.osm_type.split("")[0].toUpperCase() + location.osm_id,
+      lat: parseFloat(location.lat),
+      lng: parseFloat(location.lon),
+    });
     onLocationSelect({
       lat: parseFloat(location.lat),
       lng: parseFloat(location.lon),
@@ -62,6 +71,10 @@ export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
     setSuggestions([]);
   }, [i18n.language]);
 
+  useEffect(() => {
+    setSearch("");
+  }, [currCity]);
+
   return (
     <div ref={wrapperRef} className="relative w-full">
       <div className="relative">
@@ -78,7 +91,7 @@ export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
           </div>
         ) : (
           <div
-            className="absolute right-3 top-2.5 text-white/60 cursor-pointer hover:text-white/80 transition-all duration-300"
+            className="absolute right-2 p-1 top-1.5 text-white/60 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg cursor-pointer hover:text-white/80 hover:bg-white/20 transition-all duration-300"
             onClick={handleInputSearch}
           >
             <svg
@@ -128,5 +141,6 @@ export const SearchPlaceInput = ({ onLocationSelect, setCurrCity }) => {
 
 SearchPlaceInput.propTypes = {
   onLocationSelect: PropTypes.func.isRequired,
+  currCity: PropTypes.object,
   setCurrCity: PropTypes.func.isRequired,
 };
