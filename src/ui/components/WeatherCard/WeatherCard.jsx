@@ -33,7 +33,9 @@ export const WeatherCard = ({
             ? t("common.rainy")
             : cloudCover > 50
             ? t("common.cloudy")
-            : t("common.sunny")}
+            : isDayTime
+            ? t("common.sunny")
+            : t("common.clear")}
         </p>
         <p className="text-sm">
           Max: {maxTemp}° | Min: {minTemp}°

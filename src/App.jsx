@@ -28,12 +28,15 @@ function App() {
   const [currCity, setCurrCity] = useState(null);
   const [forecastColor, setForecastColor] = useState("fuchsia");
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLocationSelect = ({ lat, lng }) => {
+    setIsLoading(true);
     getWeather(lat, lng).then((res) => {
       setTodayWeather(getTodayWeather(res));
       setWeekWeather(getWeekWeatherArray(res.daily));
       setForecastColor(getForecastColor(res));
+      setIsLoading(false);
     });
   };
 
@@ -49,16 +52,26 @@ function App() {
       <NavBar setIsFavoritesModalOpen={setIsFavoritesModalOpen} />
       <div className={gradientBgClasses(forecastColor)}>
         <div className="my-8">
-          <p className="text-white text-4xl font-bold mb-8 lg:text-7xl">
-            {currCity ? currCity.name : t("searchTitle")}
-            {currCity && (
+          <p className="flex justify-center items-center text-white text-3xl font-bold mb-8 lg:text-7xl">
+            {isLoading ? (
+              <span className="flex justify-center items-center gap-2">
+                <span className="animate-bounce">.</span>
+                <span className="animate-bounce delay-100">.</span>
+                <span className="animate-bounce delay-200">.</span>
+              </span>
+            ) : currCity ? (
+              currCity.name
+            ) : (
+              t("searchTitle")
+            )}
+            {currCity && !isLoading && (
               <button
                 onClick={() => {
                   user?.favorite?.includes(currCity.id)
                     ? removeFavorite(currCity.id)
                     : addFavorite(currCity.id);
                 }}
-                className="ml-4 text-4xl sm:text-6xl hover:scale-110 transition-transform"
+                className="ml-4 text-3xl sm:text-6xl hover:scale-110 transition-transform"
               >
                 {user?.favorite?.includes(currCity.id) ? "⭐" : "☆"}
               </button>

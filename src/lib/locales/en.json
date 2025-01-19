@@ -5,7 +5,8 @@
     "sunny": "Sunny",
     "cloudy": "Cloudy",
     "rainy": "Rainy",
-    "snowy": "Snowy"
+    "snowy": "Snowy",
+    "clear": "Clear"
   },
   "searchTitle": "Search for any city in the world",
   "weekForecastTitle": "7-Days Forecast",

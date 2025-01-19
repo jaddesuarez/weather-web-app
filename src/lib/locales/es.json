@@ -5,7 +5,8 @@
     "sunny": "Soleado",
     "cloudy": "Nublado",
     "rainy": "Lluvioso",
-    "snowy": "Nevado"
+    "snowy": "Nevado",
+    "clear": "Despejado"
   },
   "searchTitle": "Busca cualquier ciudad del mundo",
   "weekForecastTitle": "Pronóstico de 7 días",
