@@ -2,8 +2,6 @@
 
 A modern and responsive weather application built with React that provides real-time weather information and forecasts for cities worldwide. Features include current weather conditions, hourly forecasts, 7-day predictions, and favorite cities management.
 
-This challenge has been developed by Jadde Suarez for [Mirai](https://www.mirai.com/).
-
 ## 🌟 Features
 
 - Real-time weather data
